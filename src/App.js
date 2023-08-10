@@ -17,14 +17,14 @@ function TipCalculator() {
 
   function handleReset() {
     setBillInput("");
-    setPercentage1("");
-    setPercentage2("");
+    setPercentage1(0);
+    setPercentage2(0);
   }
 
   return (
     <div>
       <h1>Tip Calulator</h1>
-      <BillInput bill={billInput} onBillInput={setBillInput} />
+      <BillInput bill={billInput} onSetBillInput={setBillInput} />
       <Percentage percentage={percentage1} onSetPercentage={setPercentage1}>
         How did you like the service?
       </Percentage>
@@ -34,14 +34,14 @@ function TipCalculator() {
       {billInput > 0 && (
         <div>
           <Output bill={billInput} tip={tip} />
-          <Reset reset={handleReset} />
+          <Reset onReset={handleReset} />
         </div>
       )}
     </div>
   );
 }
 
-function BillInput({ bill, onBillInput }) {
+function BillInput({ bill, onSetBillInput }) {
   return (
     <div>
       <h3>How much was the bill?</h3>
@@ -49,7 +49,7 @@ function BillInput({ bill, onBillInput }) {
         type="text"
         placeholder="Bill value"
         value={bill}
-        onChange={(e) => onBillInput(Number(e.target.value))}
+        onChange={(e) => onSetBillInput(Number(e.target.value))}
       />
     </div>
   );
@@ -82,6 +82,6 @@ function Output({ bill, tip }) {
   );
 }
 
-function Reset({ reset }) {
-  return <button onClick={reset}>Reset</button>;
+function Reset({ onReset }) {
+  return <button onClick={onReset}>Reset</button>;
 }
